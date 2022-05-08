@@ -10,7 +10,7 @@ import (
 
 func (client *Client) DownloadZone() (string, error) {
 	url := fmt.Sprintf(DownloadZoneUrlPattern, client.config.DnsServiceName, client.config.ZoneName)
-	req, err := http.NewRequest("GET", url, nil)
+	req, err := http.NewRequest(http.MethodGet, url, nil)
 	if err != nil {
 		return ``, errors.Wrap(err, RequestError.Error())
 	}
