@@ -8,7 +8,7 @@ import (
 	"strconv"
 )
 
-func (client *Client) DeleteRecordsById(id int) (*Response, error) {
+func (client *Client) DeleteRecord(id int) (*Response, error) {
 	url := fmt.Sprintf(DeleteRecordsUrlPattern, client.config.DnsServiceName, client.config.ZoneName, id)
 	req, err := http.NewRequest(http.MethodDelete, url, nil)
 	if err != nil {

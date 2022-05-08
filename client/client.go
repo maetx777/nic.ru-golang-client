@@ -10,7 +10,7 @@ type Client struct {
 	oauth2client *http.Client
 }
 
-func NewClient(config *Config) *Client {
+func NewClient(config *Config) IClient {
 	return &Client{config: config}
 }
 

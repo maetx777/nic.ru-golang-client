@@ -10,7 +10,7 @@ import (
 	"strconv"
 )
 
-func (client *Client) ListCnameRecords(nameFilter string, targetFilter string) ([]*RR, error) {
+func (client *Client) GetCnameRecords(nameFilter string, targetFilter string) ([]*RR, error) {
 	nameFilterRegexp, err := regexp.Compile(nameFilter)
 	if err != nil {
 		return nil, errors.Wrap(err, NameFilterError.Error())

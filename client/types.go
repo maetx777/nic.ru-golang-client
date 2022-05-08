@@ -31,6 +31,10 @@ type RR struct {
 
 type A string
 
+func (a *A) String() string {
+	return string(*a)
+}
+
 type Service struct {
 	Text         string `xml:",chardata"`
 	Admin        string `xml:"admin,attr"`
@@ -121,7 +125,7 @@ type Response struct {
 		Text     string `xml:",chardata"`
 		Service  []*Service
 		Zone     []*Zone     `xml:"zone"`
-		Address  []*Address  `xml:"address"`
+		Address  []*A        `xml:"address"`
 		Revision []*Revision `xml:"revision"`
 	} `xml:"data"`
 }

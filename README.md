@@ -1,2 +1,5 @@
-# nic.ru
-NIC.ru API Golang Client
+# NIC.ru API Golang Client
+
+```
+config
+```

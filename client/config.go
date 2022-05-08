@@ -8,10 +8,12 @@ type Config struct {
 }
 
 type Credentials struct {
-	OAuth2 struct {
-		ClientID string
-		SecretID string
-	}
+	OAuth2   *OAuth2Creds
 	Username string
 	Password string
+}
+
+type OAuth2Creds struct {
+	ClientID string
+	SecretID string
 }
