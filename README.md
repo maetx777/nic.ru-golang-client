@@ -1,5 +1,3 @@
 # NIC.ru API Golang Client
 
-```
-config
-```
+see examples
