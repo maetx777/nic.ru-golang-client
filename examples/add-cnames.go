@@ -5,7 +5,7 @@ import (
 	api "github.com/maetx777/nic.ru-golang-client/client"
 )
 
-func AddA() {
+func AddCnames() {
 	config := &api.Config{
 		Credentials: &api.Credentials{
 			OAuth2: &api.OAuth2Creds{
@@ -20,12 +20,16 @@ func AddA() {
 		CachePath:      "/tmp/.nic.ru.token",
 	}
 	client := api.NewClient(config)
-	if response, err := client.AddA([]string{`foo`}, `1.2.3.4`, 600); err != nil {
+	var cnames = []string{
+		`foo`,
+		`bar`,
+	}
+	if response, err := client.AddCnames(cnames, `habr.com.`, 600); err != nil {
 		fmt.Printf(`Add record error: %s`, err.Error())
 		return
 	} else {
 		for _, record := range response.Data.Zone[0].Rr {
-			fmt.Printf(`Added record: %s A %s`, record.Name, record.A.String())
+			fmt.Printf(`Added record: %s CNAME %s`, record.Name, record.Cname.Name)
 		}
 	}
 	if _, err := client.CommitZone(); err != nil {
