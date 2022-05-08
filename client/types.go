@@ -50,39 +50,39 @@ type Service struct {
 }
 
 type Soa struct {
-	Text  string `xml:",chardata" json:"-"`
+	Text  string `xml:",chardata"`
 	Mname struct {
-		Text    string `xml:",chardata" json:"-"`
-		Name    string `xml:"name" json:"name,omitempty"`
-		IdnName string `xml:"idn-name,omitempty" json:"idn_name,omitempty"`
-	} `xml:"mname" json:"mname,omitempty"`
+		Text    string `xml:",chardata"`
+		Name    string `xml:"name"`
+		IdnName string `xml:"idn-name,omitempty"`
+	} `xml:"mname"`
 	Rname struct {
-		Text    string `xml:",chardata" json:"-"`
-		Name    string `xml:"name" json:"name,omitempty"`
-		IdnName string `xml:"idn-name,omitempty" json:"idn_name,omitempty"`
-	} `xml:"rname" json:"rname,omitempty"`
-	Serial  string `xml:"serial" json:"serial" json:"serial,omitempty"`
-	Refresh string `xml:"refresh" json:"refresh" json:"refresh,omitempty"`
-	Retry   string `xml:"retry" json:"retry" json:"retry,omitempty"`
-	Expire  string `xml:"expire" json:"expire" json:"expire,omitempty"`
-	Minimum string `xml:"minimum" json:"minimum" json:"minimum,omitempty"`
+		Text    string `xml:",chardata"`
+		Name    string `xml:"name"`
+		IdnName string `xml:"idn-name,omitempty"`
+	} `xml:"rname"`
+	Serial  string `xml:"serial"`
+	Refresh string `xml:"refresh"`
+	Retry   string `xml:"retry"`
+	Expire  string `xml:"expire"`
+	Minimum string `xml:"minimum"`
 }
 
 type Ns struct {
-	Text    string `xml:",chardata" json:"-"`
+	Text    string `xml:",chardata"`
 	Name    string `xml:"name"`
 	IdnName string `xml:"idn-name,omitempty"`
 }
 
 type Cname struct {
-	Text    string `xml:",chardata" json:"-"`
-	Name    string `xml:"name" json:"name,omitempty"`
-	IdnName string `xml:"idn-name,omitempty" json:"idn_name,omitempty"`
+	Text    string `xml:",chardata"`
+	Name    string `xml:"name"`
+	IdnName string `xml:"idn-name,omitempty"`
 }
 
 type Txt struct {
-	Text   string `xml:",chardata" json:"-"`
-	String string `xml:"string" json:"string,omitempty"`
+	Text   string `xml:",chardata"`
+	String string `xml:"string"`
 }
 
 type Zone struct {
@@ -105,8 +105,6 @@ type Revision struct {
 	Ip     string `xml:"ip,attr"`
 	Number string `xml:"number,attr"`
 }
-
-type Address string
 
 type Error struct {
 	Text string `xml:",chardata"`
