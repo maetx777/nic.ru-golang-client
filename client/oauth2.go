@@ -35,12 +35,12 @@ func (client *Client) GetOauth2Client() (*http.Client, error) {
 
 	oauth2Token, err := oauth2Config.PasswordCredentialsToken(ctx, client.config.Credentials.Username, client.config.Credentials.Password)
 	if err != nil {
-		return nil, errors.Wrap(err, `nic.ru API authorize error`)
+		return nil, errors.Wrap(err, AuthorizationError.Error())
 	}
 
 	client.oauth2client = oauth2Config.Client(ctx, oauth2Token)
 	if err := client.UpdateCacheFile(oauth2Token); err != nil {
-		return nil, errors.Wrap(err, `update token cache file error`)
+		return nil, errors.Wrap(err, UpdateTokenCacheFileError.Error())
 	}
 
 	return client.oauth2client, nil
