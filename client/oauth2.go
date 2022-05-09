@@ -21,7 +21,7 @@ func (client *Client) GetOauth2Client() (*http.Client, error) {
 			TokenURL:  TokenURL,
 			AuthStyle: oauth2.AuthStyleInParams,
 		},
-		Scopes: []string{`.+:/dns-master/.+`},
+		Scopes: []string{OAuth2Scope},
 	}
 
 	cachedToken, _ := client.ReadCacheFile()

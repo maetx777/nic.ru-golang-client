@@ -11,4 +11,5 @@ const (
 	RollbackUrlPattern      = BaseURL + `/dns-master/services/%s/zones/%s/rollback`
 	DownloadZoneUrlPattern  = BaseURL + `/dns-master/services/%s/zones/%s`
 	SuccessStatus           = `success`
+	OAuth2Scope             = `.+:/dns-master/.+`
 )
