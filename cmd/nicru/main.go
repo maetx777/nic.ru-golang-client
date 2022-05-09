@@ -22,8 +22,13 @@ func main() {
 	cmd.PersistentFlags().StringVar(&config.DnsServiceName, `service-name`, `EXAMPLE`, `имя DNS-сервиса`)
 	cmd.PersistentFlags().StringVar(&config.CachePath, `cache-path`, `/tmp/.nic.ru.token`, `путь до файла, где будет храниться авторизация от API`)
 
-	cmd.AddCommand(addACmd())   // подключаем команду add-a
-	cmd.AddCommand(commitCmd()) // подключаем команду add-a
+	cmd.AddCommand(addACmd())      // подключаем команду add-a
+	cmd.AddCommand(addCnamesCmd()) // подключаем команду add-cnames
+	cmd.AddCommand(commitCmd())    // подключаем команду commit
+	cmd.AddCommand(rollbackCmd())  // подключаем команду rollback
+	cmd.AddCommand(listACmd())
+	cmd.AddCommand(listCnamescmd())
+	cmd.AddCommand(deleteCmd())
 	if err := cmd.Execute(); err != nil {
 		logrus.Infoln(err.Error())
 	}

@@ -14,6 +14,9 @@ func (client *Client) CommitZone() (*Response, error) {
 		return nil, errors.Wrap(err, RequestError.Error())
 	}
 	response, err := client.Do(request)
+	if err != nil {
+		return nil, errors.Wrap(err, ResponseError.Error())
+	}
 	if response.StatusCode != http.StatusOK {
 		return nil, errors.Wrap(err, InvalidStatusCode.Error())
 	}
