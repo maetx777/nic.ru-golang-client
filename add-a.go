@@ -1,4 +1,4 @@
-package api
+package nic_ru_golang_client
 
 import (
 	"bytes"
@@ -9,20 +9,19 @@ import (
 	"strconv"
 )
 
-func (client *Client) AddCnames(names []string, target string, ttl int) (*Response, error) {
-	payload := Request{
+func (client *Client) AddA(names []string, target string, ttl int) (*Response, error) {
+	payload := &Request{
 		RrList: &RrList{
 			Rr: []*RR{},
 		},
 	}
+	t := A(target)
 	for _, name := range names {
 		payload.RrList.Rr = append(payload.RrList.Rr, &RR{
 			Name: name,
-			Type: `CNAME`,
+			Type: `A`,
 			Ttl:  strconv.Itoa(ttl),
-			Cname: &Cname{
-				Name: target,
-			},
+			A:    &t,
 		})
 	}
 
@@ -44,13 +43,12 @@ func (client *Client) AddCnames(names []string, target string, ttl int) (*Respon
 	}
 
 	if response.StatusCode != http.StatusOK {
-		return nil, errors.Wrap(InvalidStatusCode, strconv.Itoa(response.StatusCode))
+		return nil, errors.Wrap(err, strconv.Itoa(response.StatusCode))
 	} else {
 		buf = bytes.NewBuffer(nil)
 		if _, err := buf.ReadFrom(response.Body); err != nil {
 			return nil, errors.Wrap(err, BufferReadError.Error())
 		}
-
 		s := buf.String()
 
 		buf = bytes.NewBuffer(nil)
@@ -62,10 +60,9 @@ func (client *Client) AddCnames(names []string, target string, ttl int) (*Respon
 		}
 
 		if response.Status != SuccessStatus {
-			return nil, errors.Wrap(ApiNonSuccessError, s)
+			return nil, ApiNonSuccessError
 		} else {
 			return response, nil
 		}
 	}
-
 }

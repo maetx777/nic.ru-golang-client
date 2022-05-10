@@ -1,4 +1,4 @@
-package api
+package nic_ru_golang_client
 
 type IClient interface {
 	AddA(names []string, target string, ttl int) (*Response, error)

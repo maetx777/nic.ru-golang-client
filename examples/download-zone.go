@@ -2,13 +2,13 @@ package examples
 
 import (
 	"fmt"
-	api "github.com/maetx777/nic.ru-golang-client/client"
+	"github.com/maetx777/nic.ru-golang-client"
 )
 
 func DownloadZone() {
-	config := &api.Config{
-		Credentials: &api.Credentials{
-			OAuth2: &api.OAuth2Creds{
+	config := &nic_ru_golang_client.Config{
+		Credentials: &nic_ru_golang_client.Credentials{
+			OAuth2: &nic_ru_golang_client.OAuth2Creds{
 				ClientID: "qwe",
 				SecretID: "xyz",
 			},
@@ -19,7 +19,7 @@ func DownloadZone() {
 		DnsServiceName: "EXAMPLE",
 		CachePath:      "/tmp/.nic.ru.token",
 	}
-	client := api.NewClient(config)
+	client := nic_ru_golang_client.NewClient(config)
 	if zoneContent, err := client.DownloadZone(); err != nil {
 		fmt.Printf(`Download zone error: %s`, err.Error())
 		return

@@ -1,4 +1,4 @@
-package api
+package nic_ru_golang_client
 
 import (
 	"context"
