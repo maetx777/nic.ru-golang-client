@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	api "github.com/maetx777/nic.ru-golang-client"
+	api "github.com/maetx777/nic.ru-golang-client/client"
 	"github.com/spf13/cobra"
 )
 

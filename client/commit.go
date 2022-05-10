@@ -1,25 +1,24 @@
-package nic_ru_golang_client
+package api
 
 import (
 	"encoding/xml"
 	"fmt"
 	"github.com/pkg/errors"
 	"net/http"
-	"strconv"
 )
 
-func (client *Client) DeleteRecord(id int) (*Response, error) {
-	url := fmt.Sprintf(DeleteRecordsUrlPattern, client.config.DnsServiceName, client.config.ZoneName, id)
-	req, err := http.NewRequest(http.MethodDelete, url, nil)
+func (client *Client) CommitZone() (*Response, error) {
+	url := fmt.Sprintf(CommitUrlPattern, client.config.DnsServiceName, client.config.ZoneName)
+	request, err := http.NewRequest(http.MethodPost, url, nil)
 	if err != nil {
 		return nil, errors.Wrap(err, RequestError.Error())
 	}
-	response, err := client.Do(req)
+	response, err := client.Do(request)
 	if err != nil {
 		return nil, errors.Wrap(err, ResponseError.Error())
 	}
 	if response.StatusCode != http.StatusOK {
-		return nil, errors.Wrap(InvalidStatusCode, strconv.Itoa(response.StatusCode))
+		return nil, errors.Wrap(err, InvalidStatusCode.Error())
 	}
 	apiResponse := Response{}
 	if err := xml.NewDecoder(response.Body).Decode(&apiResponse); err != nil {

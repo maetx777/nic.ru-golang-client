@@ -1,4 +1,4 @@
-package nic_ru_golang_client
+package api
 
 type Config struct {
 	Credentials    *Credentials // структура с данными авторизации в апишке

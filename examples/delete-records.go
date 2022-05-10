@@ -2,13 +2,13 @@ package examples
 
 import (
 	"fmt"
-	"github.com/maetx777/nic.ru-golang-client"
+	api "github.com/maetx777/nic.ru-golang-client/client"
 )
 
 func DeleteRecords() {
-	config := &nic_ru_golang_client.Config{
-		Credentials: &nic_ru_golang_client.Credentials{
-			OAuth2: &nic_ru_golang_client.OAuth2Creds{
+	config := &api.Config{
+		Credentials: &api.Credentials{
+			OAuth2: &api.OAuth2Creds{
 				ClientID: "qwe",
 				SecretID: "xyz",
 			},
@@ -19,7 +19,7 @@ func DeleteRecords() {
 		DnsServiceName: "EXAMPLE",
 		CachePath:      "/tmp/.nic.ru.token",
 	}
-	client := nic_ru_golang_client.NewClient(config)
+	client := api.NewClient(config)
 	if response, err := client.DeleteRecord(123456); err != nil {
 		fmt.Printf(`Delete record error: %s`, err.Error())
 		return

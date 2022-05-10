@@ -1,4 +1,4 @@
-package nic_ru_golang_client
+package api
 
 import (
 	"bytes"

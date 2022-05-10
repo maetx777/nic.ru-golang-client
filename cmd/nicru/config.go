@@ -1,8 +1,6 @@
 package main
 
-import (
-	api "github.com/maetx777/nic.ru-golang-client"
-)
+import api "github.com/maetx777/nic.ru-golang-client/client"
 
 var config = &api.Config{
 	Credentials: &api.Credentials{
