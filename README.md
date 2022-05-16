@@ -1,9 +1,9 @@
 # NIC.ru API Golang Client Utility
-Консольная утилита для работы с апишкой NIC.ru
-Использует библиотеку https://github.com/libdns/nicrudns
+- Консольная утилита для работы с апишкой NIC.ru
+- Использует библиотеку https://github.com/libdns/nicrudns
 
 ## Сборка
-make build
+```make build```
 
 ## Help
 ```$ nicru --help
