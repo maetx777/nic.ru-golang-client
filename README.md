@@ -1,6 +1,7 @@
 # NIC.ru API Golang Client
 
-see examples
+## !!!DEPRECATED REPOSITORY!!!
+See libdns implementations https://github.com/libdns/nicrudns
 
 ## CLI Utility
 go build ./cmd/nicru
