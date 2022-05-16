@@ -8,7 +8,8 @@ make build
 ```
 
 ## Help
-```$ nicru --help
+```
+$ ./bin/nicru --help
 oauth2 ключи нужно получить в ЛК nic.ru - https://www.nic.ru/manager/oauth.cgi?step=oauth.app_register
 имя DNS-сервиса можно посмотреть по адресу https://www.nic.ru/manager/services.cgi?step=srv.my_dns&view.order_by=domain
 
