@@ -3,7 +3,9 @@
 - Использует библиотеку https://github.com/libdns/nicrudns
 
 ## Сборка
-```make build```
+```
+make build
+```
 
 ## Help
 ```$ nicru --help
