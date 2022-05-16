@@ -3,7 +3,6 @@ package main
 import (
 	"bufio"
 	"bytes"
-	"github.com/libdns/nicrudns"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	"os"
@@ -19,9 +18,7 @@ func addCnamesCmd() *cobra.Command {
 		Use:   `add-cnames`,
 		Short: `позволяет массово создавать синеймы для имён, хранимых в файле построчно`,
 		Run: func(cmd *cobra.Command, args []string) {
-			client := nicrudns.NewClient(provider)
-
-			if err := addCnamesFromFile(client, filePath, target, ttl); err != nil {
+			if err := addCnamesFromFile(filePath, target, ttl); err != nil {
 				logrus.Fatalln(err)
 			}
 
@@ -43,9 +40,7 @@ func addCnameCmd() *cobra.Command {
 		Use:   `add-cname`,
 		Short: `создать одну CNAME-запись`,
 		Run: func(cmd *cobra.Command, args []string) {
-			client := nicrudns.NewClient(provider)
-
-			if response, err := client.AddCnames(zoneName, []string{name}, target, ttl); err != nil {
+			if response, err := apiClient.AddCnames(zoneName, []string{name}, target, ttl); err != nil {
 				logrus.Fatalln(err)
 			} else {
 				for _, rr := range response.Data.Zone[0].Rr {
@@ -60,7 +55,7 @@ func addCnameCmd() *cobra.Command {
 	return cmd
 }
 
-func addCnamesFromFile(client nicrudns.IClient, filePath string, target string, ttl string) error {
+func addCnamesFromFile(filePath string, target string, ttl string) error {
 	data, err := os.ReadFile(filePath)
 	if err != nil {
 		logrus.Fatalln(`file error: %s`, err)
@@ -71,7 +66,7 @@ func addCnamesFromFile(client nicrudns.IClient, filePath string, target string, 
 		names = append(names, scanner.Text())
 	}
 
-	if response, err := client.AddCnames(zoneName, names, target, ttl); err != nil {
+	if response, err := apiClient.AddCnames(zoneName, names, target, ttl); err != nil {
 		return err
 	} else {
 		for _, rr := range response.Data.Zone[0].Rr {

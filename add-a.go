@@ -1,7 +1,6 @@
 package main
 
 import (
-	"github.com/libdns/nicrudns"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 )
@@ -16,9 +15,7 @@ func addACmd() *cobra.Command {
 		Use:   `add-a`,
 		Short: `создать одну A-запись`,
 		Run: func(cmd *cobra.Command, args []string) {
-			client := nicrudns.NewClient(provider)
-
-			if response, err := client.AddA(zoneName, []string{name}, target, ttl); err != nil {
+			if response, err := apiClient.AddA(zoneName, []string{name}, target, ttl); err != nil {
 				logrus.Fatalln(err)
 			} else {
 				for _, rr := range response.Data.Zone[0].Rr {

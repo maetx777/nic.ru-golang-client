@@ -18,8 +18,7 @@ func listRecordsCmd() *cobra.Command {
 		Use:   `list-records`,
 		Short: `ищет записи, с возможностью фильтрации по типа, имени и таргету`,
 		Run: func(cmd *cobra.Command, args []string) {
-			client := nicrudns.NewClient(provider)
-			if err := doListRecords(client, recTypeFilter, nameFilter, targetFilter); err != nil {
+			if err := doListRecords(recTypeFilter, nameFilter, targetFilter); err != nil {
 				logrus.Fatalln(err)
 			}
 		},
@@ -39,8 +38,7 @@ func listARecordsCmd() *cobra.Command {
 		Use:   `list-a-records`,
 		Short: `ищет A-записи, с возможностью фильтрации по имени и таргету`,
 		Run: func(cmd *cobra.Command, args []string) {
-			client := nicrudns.NewClient(provider)
-			if err := doListRecords(client, `^A$`, nameFilter, targetFilter); err != nil {
+			if err := doListRecords(`^A$`, nameFilter, targetFilter); err != nil {
 				logrus.Fatalln(err)
 			}
 		},
@@ -59,8 +57,7 @@ func listCnameRecordsCmd() *cobra.Command {
 		Use:   `list-cname-records`,
 		Short: `ищет CNAME-записи, с возможностью фильтрации по имени и таргету`,
 		Run: func(cmd *cobra.Command, args []string) {
-			client := nicrudns.NewClient(provider)
-			if err := doListRecords(client, `^CNAME$`, nameFilter, targetFilter); err != nil {
+			if err := doListRecords(`^CNAME$`, nameFilter, targetFilter); err != nil {
 				logrus.Fatalln(err)
 			}
 		},
@@ -70,8 +67,8 @@ func listCnameRecordsCmd() *cobra.Command {
 	return cmd
 }
 
-func doListRecords(client nicrudns.IClient, typeFilter string, nameFilter string, targetFilter string) error {
-	if rrs, err := client.GetRecords(zoneName); err != nil {
+func doListRecords(typeFilter string, nameFilter string, targetFilter string) error {
+	if rrs, err := apiClient.GetRecords(zoneName); err != nil {
 		return err
 	} else {
 		nameRegexp, err := regexp.Compile(nameFilter)

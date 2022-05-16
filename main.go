@@ -15,6 +15,8 @@ func main() {
 	cmd := &cobra.Command{
 		Use:   "nicru",
 		Short: `утилита для работы с апишкой nic.ru`,
+		Long: `oauth2 ключи нужно получить в ЛК nic.ru - https://www.nic.ru/manager/oauth.cgi?step=oauth.app_register
+имя DNS-сервиса можно посмотреть по адресу https://www.nic.ru/manager/services.cgi?step=srv.my_dns&view.order_by=domain`,
 	}
 
 	cmd.PersistentFlags().StringVar(&provider.OAuth2ClientID, "oauth2-client-id", ``, `nic.ru oauth2 client-id`)

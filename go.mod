@@ -4,7 +4,6 @@ go 1.18
 
 require (
 	github.com/libdns/nicrudns v0.0.2
-	github.com/pkg/errors v0.9.1
 	github.com/sirupsen/logrus v1.8.1
 	github.com/spf13/cobra v1.4.0
 )

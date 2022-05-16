@@ -3,7 +3,6 @@ package main
 import (
 	"bufio"
 	"bytes"
-	"github.com/libdns/nicrudns"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	"os"
@@ -19,8 +18,7 @@ func deleteRecordsCmd() *cobra.Command {
 		Use:   `delete-records`,
 		Short: `позволяет массово удалять записи с числовыми айдишниками, хранимыми в файле построчно`,
 		Run: func(cmd *cobra.Command, args []string) {
-			client := nicrudns.NewClient(provider)
-			doDeleteRecordsByIds(zoneName, client, filePath)
+			doDeleteRecordsByIds(zoneName, filePath)
 		},
 	}
 	cmd.PersistentFlags().StringVar(&filePath, `file-path`, ``, `файл со списком айдишников`)
@@ -35,8 +33,7 @@ func deleteRecord() *cobra.Command {
 		Use:   `delete-record`,
 		Short: `удалять одну запись`,
 		Run: func(cmd *cobra.Command, args []string) {
-			client := nicrudns.NewClient(provider)
-			if _, err := client.DeleteRecord(zoneName, id); err != nil {
+			if _, err := apiClient.DeleteRecord(zoneName, id); err != nil {
 				logrus.Fatalln(err)
 			} else {
 				logrus.Infof(`id %d deleted`, id)
@@ -47,7 +44,7 @@ func deleteRecord() *cobra.Command {
 	return cmd
 }
 
-func doDeleteRecordsByIds(zoneName string, client nicrudns.IClient, filePath string) {
+func doDeleteRecordsByIds(zoneName string, filePath string) {
 
 	data, err := os.ReadFile(filePath)
 	if err != nil {
@@ -65,7 +62,7 @@ func doDeleteRecordsByIds(zoneName string, client nicrudns.IClient, filePath str
 	}
 
 	for _, id := range ids {
-		if _, err := client.DeleteRecord(zoneName, int(id)); err != nil {
+		if _, err := apiClient.DeleteRecord(zoneName, int(id)); err != nil {
 			logrus.Errorln(id, err)
 		} else {
 			logrus.Infof(`id %d deleted`, id)
